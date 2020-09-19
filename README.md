@@ -1,2 +1,2 @@
 # Werwolf_Brettspiel
-Eine Webeite, auf der man Werwolf spielen kann.
+Eine Webseite, auf der man Werwolf spielen kann.
