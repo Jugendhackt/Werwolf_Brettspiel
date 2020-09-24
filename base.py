@@ -45,11 +45,13 @@ spieler_rollen = {spielername: rollen_spiel[0]} #,
 
 def rollen_zuteilung():
     zufällige_rolle = random.choice(rollen_spiel)
+    print(zufällige_rolle)
 
-def  spielernamen_zuteilung():
     zufälliger_spieler = random.choice(gesamt_spieler)
+    print(zufälliger_spieler)
 
-    spieler_rollen[zufälliger_spieler] = zufällige_rolle
+    spieler_rollen.__setitem__(zufälliger_spieler, zufällige_rolle)
+
 
 
 #
@@ -129,7 +131,10 @@ def seher():
     spieler_rollen.get(spielername)  # ermitteln des an spielernamen zugeordneten values
     print("Dieser Spieler ist ", spieler_rollen.get(spielername))
 
+def Tötungsabstimmung():
+    stimmen = input["Wen möchtest du Töten?" ]
 
+Tötungsabstimmung()
 print(spieler_rollen.get(spielername))  # Rolle des Spielers printen
 seher()
 hexe()
