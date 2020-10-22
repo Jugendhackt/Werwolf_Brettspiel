@@ -21,7 +21,6 @@ spieler_nummer_const = spieler_nummer  # konstantes Dict erstellen, um das ander
 gesamt_spieler_const = gesamt_spieler  # konstantes Dict erstellen, um das andere zu verändern
 
 spieler_rollen = {}  # Ort zum Sammeln von Spielern und ihren Rollen
-tode_rollen = []
 
 def rollen_zuteilung():
     zufällige_rolle = random.choice(rollen_spiel)  # Zufällige Rolle aus Liste rollen_spiel heraussuchen und in Variable speichern
@@ -53,18 +52,6 @@ for i in range(0, 8):  # ( Spielern müssen Rollen zugeteil werden
 #    if seher_spruch == 2:  # wenn zufallszahl 2 ist
 #        seher_checkt = int(input(seher_DE[1]))  # Spruch 2 schreiben
 #
-
-
-
-def tod():
-    vote = input("Wen möchtest du Tod sehen? ")
-    stimme = spieler_rollen[vote]
-    print(stimme)
-    print(spieler_rollen)
-    tode_rollen.append(stimme)
-    spieler_rollen.pop(vote)
-    print(spieler_rollen)
-    print(tode_rollen)
 
 def seher():
     time.sleep(1)

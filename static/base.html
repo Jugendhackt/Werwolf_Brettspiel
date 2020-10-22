@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Werwolf</title>
+</head>
+<body style="background-image :/templates/images/77.jpg;">
+
+	<h1 style="color:black;text-align:center;"> Werpaka Online</h1>
+	<p style="color:pink;text-align:center;"> Nichts ist sicher.</p>
+
+	<button type="button">Wenn du hier draufklickst, dann kommst du ins Land der Wölfe</button>
+	<br>
+	
+	<form action="/action_page.php">
+  <label for="fname">Name:</label><br>
+  <input type="text" id="fname" name="fname" value="Alpakini"><br>
+  <input type="submit" value="Ok">
+</form>
+	
+<br>
+<img src="{{url_for('static',filename='Werwolf_Dorfbewohner.png')}}"  alt='Bild eines Dorfbewohners'>
+<p>du bist ein Dorfbewohner, versuche zu überleben und lynche die bösen Wölfe</p>
+
+</body>
+</html>
