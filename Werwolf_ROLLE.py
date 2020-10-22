@@ -5,6 +5,8 @@ votes = []
 Rollennummer = 1  # Spieler ID
 gesamt_spieler = []  # Ort zum Sammeln aller Spielernamen
 spieler_nummer = {}  # Ort zum Sammeln von Spieler ID und zugewiesener Spieler
+Zeit_w = (120) # Hier landet die Zeit zum Wählen, wenn sie vom Spieler modifiziert wurde
+
 for x in range(0, 4):  # 4 Spieler eingeben
 
     spielername = input("Was ist ihr Spielername? ")  # Spielernamen eingeben
@@ -19,24 +21,16 @@ gesamt_spieler_const = gesamt_spieler  # konstantes Dict erstellen, um das ander
 aufgang_de = ["Mit dem Dorf wacht ihr alle auf.",
         "Alle Lebenden sind erwacht.",
         "Die Sonne geht auf und ihr alle erwacht."
-        "Du wurdest von einem komischen Gestank aufgeweckt..."]
+        "Du wurdest von einem komischen Gestank aufgeweckt...",]
 
-
+print(random.choice(aufgang_de))
 
 def Stimmabgabe():
 
     voting_de = ["Für welchen Spieler möchtest du abstimmen ?",  # Liste mit Sprüchen (Spruch 1)
                 "Wen möchtest du tot sehen ?"]  # (Spruch 2)
 
-    voting_spruch = random.randint(1, 2)  # zufallszahl 1 oder 2 generieren
-
-    stimme = None
-
-    if voting_spruch == 1:  # wenn zufallszahl 1 ist
-        stimme = int(input(voting_de[0]))  # Spruch 1 schreiben
-
-    if voting_spruch == 2:  # wenn zufallszahl = 2
-        stimme = int(input(voting_de[1]))  # Spruch 2 schreiben
+    stimme = int(input(random.choice(voting_de)))  # Spruch 2 schreiben
 
     votes.append(stimme)
 
