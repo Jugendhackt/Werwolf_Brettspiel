@@ -1,11 +1,11 @@
 import random
+import time
 
 tote_spieler = {}
 votes = []
 Rollennummer = 1  # Spieler ID
 gesamt_spieler = []  # Ort zum Sammeln aller Spielernamen
 spieler_nummer = {}  # Ort zum Sammeln von Spieler ID und zugewiesener Spieler
-Zeit_w = (120) # Hier landet die Zeit zum Wählen, wenn sie vom Spieler modifiziert wurde
 
 for x in range(0, 4):  # 4 Spieler eingeben
 
@@ -25,6 +25,26 @@ aufgang_de = ["Mit dem Dorf wacht ihr alle auf.",
 
 print(random.choice(aufgang_de))
 
+def zähler(zeit_w):
+    while zeit_w:
+        mins, secs = divmod(zeit_w, 60)
+        timer = '{:02d}:{:02d}'.format(mins, secs)
+        time.sleep(1)
+        print(timer, end="\r")
+        zeit_w -= 1
+
+    print('fertig')
+
+def nutzer_zähler():
+    a = input("Willst du die Zeit für Wahlen definieren? (Enter wenn ja)")
+    if(len(a) == 0):
+        global zeit_w
+        zeit_w = int(input("Trage die Zeit in Sekunden"))
+        return zeit_w
+    else:
+        return 90
+zeit_w = nutzer_zähler()
+zähler(zeit_w)
 def Stimmabgabe():
 
     voting_de = ["Für welchen Spieler möchtest du abstimmen ?",  # Liste mit Sprüchen (Spruch 1)
