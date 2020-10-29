@@ -1,5 +1,9 @@
 import random
 import time
+from multiprocessing import *
+from timeout_decorator import *
+#from foo import *
+#import sys # ?
 
 tote_spieler = {}
 votes = []
@@ -23,8 +27,6 @@ aufgang_de = ["Mit dem Dorf wacht ihr alle auf.",
         "Die Sonne geht auf und ihr alle erwacht."
         "Du wurdest von einem komischen Gestank aufgeweckt...",]
 
-print(random.choice(aufgang_de))
-
 def zähler(zeit_w):
     while zeit_w:
         mins, secs = divmod(zeit_w, 60)
@@ -36,24 +38,24 @@ def zähler(zeit_w):
     print('fertig')
 
 def nutzer_zähler():
-    a = input("Willst du die Zeit für Wahlen definieren? (Enter wenn ja)")
+    a = input("Willst du die Zeit für Wahlen definieren? (Enter wenn ja) ")
     if(len(a) == 0):
         global zeit_w
-        zeit_w = int(input("Trage die Zeit in Sekunden"))
+        zeit_w = int(input("Trage die Zeit in Sekunden "))
         return zeit_w
     else:
         return 90
 zeit_w = nutzer_zähler()
-zähler(zeit_w)
+
+print(random.choice(aufgang_de))
+
+@timeout_decorator.timeout(zeit_w)
 def Stimmabgabe():
 
     voting_de = ["Für welchen Spieler möchtest du abstimmen ?",  # Liste mit Sprüchen (Spruch 1)
                 "Wen möchtest du tot sehen ?"]  # (Spruch 2)
-
     stimme = int(input(random.choice(voting_de)))  # Spruch 2 schreiben
-
     votes.append(stimme)
-
 
 
 def Stimmen_Auszaehlen():
@@ -77,27 +79,25 @@ def Stimmen_Auszaehlen():
                     votes_pro_spieler[rollennummer] = stimmen_zaehler
 
                     print(votes_pro_spieler)
+        if not len(votes_pro_spieler):
+            print('Es wurde niemand gewählt.')
+        else:
+            print(max(votes_pro_spieler.values()))
+            highest = max(votes_pro_spieler.values())
+            most_votes = [key for key in votes_pro_spieler if votes_pro_spieler[key] == highest]
+            keys = list(votes_pro_spieler.keys())
+            values = list(votes_pro_spieler.values())
+            print(keys[values.index(highest)])
 
-
-    print(max(votes_pro_spieler.values()))
-
-    highest = max(votes_pro_spieler.values())
-
-    most_votes = [key for key in votes_pro_spieler if votes_pro_spieler[key] == highest]
-
-    keys = list(votes_pro_spieler.keys())
-    values = list(votes_pro_spieler.values())
-    print(keys[values.index(highest)])
-
-    voted_player = keys[values.index(highest)]
-    killed_player = spieler_nummer.get(voted_player)
-    print("Voted Player = ", voted_player)
-    print(most_votes)
-    print(voted_player)
-    print(spieler_nummer)
-    Tod = {voted_player: killed_player}
-    tote_spieler.update(Tod)
-    print(tote_spieler)
+            voted_player = keys[values.index(highest)]
+            killed_player = spieler_nummer.get(voted_player)
+            print("Voted Player = ", voted_player)
+            print(most_votes)
+            print(voted_player)
+            print(spieler_nummer)
+            Tod = {voted_player: killed_player}
+            tote_spieler.update(Tod)
+            print(tote_spieler)
 
 
 def Werwolf_Abstimmergebnis(most_votes: list, killed_player: int) -> None:
@@ -106,11 +106,17 @@ def Werwolf_Abstimmergebnis(most_votes: list, killed_player: int) -> None:
 
         print(killed_player, "ist getötet worden. ")
 
-
-Stimmabgabe()
-Stimmabgabe()
-Stimmabgabe()
+#if not votes_pro_spieler.values():
+try:
+    Stimmabgabe()
+    Stimmabgabe()
+    Stimmabgabe()
+except:
+    pass
 Stimmen_Auszaehlen()
 #print(stimmen_zaehler)
 #print(most_votes)
-Werwolf_Abstimmergebnis(most_votes, killed_player)
+try:
+    Werwolf_Abstimmergebnis(most_votes, killed_player)
+except NameError:
+    print('Ihr konntet euch nicht entscheiden.')
